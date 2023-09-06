@@ -13,10 +13,12 @@ public class PlayerController : MonoBehaviour
     {
         _Rigidbody = GetComponent<Rigidbody>();
         _Animator = GetComponent<Animator>();
+        Physics.gravity *= 1.5f;
     }
 
     void Update()
     {
+        _Animator.SetBool("InAir", !Physics.Raycast(_Rigidbody.position + Vector3.up * 0.2f, Vector3.down, 0.3f));
         if (Input.GetAxisRaw("Horizontal") > 0)
         {
             Direction = 1;
@@ -36,12 +38,16 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (!_Animator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
+            if (!_Animator.GetBool("InAir"))
             {
                 _Animator.SetTrigger("Jump");
-                _Rigidbody.AddForce(Vector3.up * 5, ForceMode.Impulse);
+                _Animator.SetBool("InAir", true);
+                _Rigidbody.AddForce(Vector3.up * 8, ForceMode.Impulse);
             }
         }
+        Debug.DrawRay(_Rigidbody.position + Vector3.up * 0.2f, Vector3.down * 0.3f);
+        Debug.Log(!_Animator.GetBool("InAir"));
+        //Debug.Log(HitInfo.collider.gameObject.name);
     }
     private void FixedUpdate()
     {
