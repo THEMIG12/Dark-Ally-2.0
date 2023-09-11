@@ -36,11 +36,11 @@ ModelImporter:
       name: Jumping Up
       takeName: mixamo.com
       internalID: -203655887218126122
-      firstFrame: 10
+      firstFrame: 14.9
       lastFrame: 25
       wrapMode: 0
       orientationOffsetY: 0
-      level: 0
+      level: 0.5
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
